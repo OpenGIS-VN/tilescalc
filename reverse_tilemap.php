@@ -11,11 +11,13 @@ function tileXYToLatLon($x, $y, $zoom) {
     return ['lat' => $lat, 'lon' => $lon, 'zoom' => $zoom];
 }
 
+// https://api.opengis.vn/tilescalc/reverse_tilemap.php?url=https://cdn.estatemanner.com/tile/qhsdd/17/104369/61594.png
+// https://api.opengis.vn/tilescalc/reverse_tilemap.php?url=https://tile.openstreetmap.org/15/26092/15398.png
 if (isset($_GET['url'])) {
     $url = $_GET['url'];
-    
-    // Kiểm tra định dạng URL
-    if (preg_match('/https:\/\/tile\.openstreetmap\.org\/(\d+)\/(\d+)\/(\d+)\.png/', $url, $matches)) {
+
+    // Tách các tham số z, x, y từ URL
+    if (preg_match('/\/(\d+)\/(\d+)\/(\d+)\.png/', $url, $matches)) {
         $zoom = intval($matches[1]);
         $x = intval($matches[2]);
         $y = intval($matches[3]);
